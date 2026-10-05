@@ -40,9 +40,6 @@ jobs:
       - name: Build
         run: mkdir -p dist && cp index.js dist/
 
-      - name: Checksums
-        run: cd dist && sha256sum -- * > SHA256SUMS.txt
-
       - name: Release notes + Full Changelog link
         shell: bash
         env:
@@ -81,7 +78,7 @@ jobs:
       - uses: softprops/action-gh-release@v3
         id: release
         with:
-          name: v${{ needs.build.outputs.version }}
+          name: gh-test-fixture v${{ needs.build.outputs.version }}   # the project name, e.g. PixelForge v1.2.0
           body_path: release-notes.md
           files: dist/*
           fail_on_unmatched_files: true
